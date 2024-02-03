@@ -1,16 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Attendance from './attendance/Attendance';
+import Schedule from './schedule/Schedule';
+import { PROFESSORS } from '../../data/professors';
 import styles from './HogwartsSchedule.module.css';
-import {Attendance} from './attendance';
-import {useState} from 'react';
-import {Schedule} from './schedule';
-import {PROFESSORS} from '../../data/professors';
 
-const initProfessors = () => {
-  return PROFESSORS.map((item) => ({...item, isPresent: true}));
-};
-
-export const HogwartsSchedule = () => {
-  const [professors, setProfessors] = useState(initProfessors());
+const HogwartsSchedule = () => {
+  const [professors, setProfessors] = useState(PROFESSORS);
 
   const handleAttendance = (profId, isPresent) => {
     // TODO - better way to update the object in the list
@@ -18,6 +13,10 @@ export const HogwartsSchedule = () => {
     profMatchIdx.isPresent = isPresent;
     setProfessors([...professors]);
   };
+
+  console.log('Render Parent');
+
+  // Subject filter can come here, based on selected subjects professor and students allocation has to be maintained
 
   return (
     <div className={styles.wrapper}>
@@ -29,3 +28,5 @@ export const HogwartsSchedule = () => {
     </div>
   );
 };
+
+export default HogwartsSchedule;

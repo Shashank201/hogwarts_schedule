@@ -1,4 +1,4 @@
-import {HogwartsSchedule} from './view/hogwartsSchedule';
+import HogwartsSchedule from './view/hogwartsSchedule/HogwartsSchedule';
 import './App.css';
 
 function App() {
