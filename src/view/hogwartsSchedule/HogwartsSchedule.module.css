@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  height: 100%;
+}
+
+.wrapper > div {
+  flex: 1;
+  border-right: 2px solid gray;
+}
+
+.wrapper > div:last-child {
+  border-right: none;
+}
