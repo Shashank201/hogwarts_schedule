@@ -63,16 +63,16 @@ const Schedule = ({ professors }) => {
           <tr>
             <th width='30%'>Student</th>
             <th width='30%'>Subject</th>
-            <th>Professor</th>
+            <th width='100%'>Professor</th>
           </tr>
         </thead>
         <tbody>
           {allocations
             ? allocations.map(({ key, studentName, subject, professor }) => (
                 <tr key={key} aria-label={`allocation for ${studentName}`}>
-                  <td aria-label={`student name ${key}`}>{studentName}</td>
+                  <td aria-label={studentName}>{studentName}</td>
                   <td aria-label={subject}>{subject}</td>
-                  <td aria-label={subject}>
+                  <td aria-label={professor?.name || 'Not Assigned'}>
                     {professor ? (
                       professor.name
                     ) : (
