@@ -1,16 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { getProfessorName } from '../../../data/professors';
-import {
-  // SUBJECTS,
-  SUBJECTS_MAPPING,
-  UPPER_HIERARCHY,
-} from '../../../data/subjects';
+import { SUBJECTS_MAPPING, UPPER_HIERARCHY } from '../../../data/subjects';
 import {
   INITIAL_ALLOCATION,
   allocatedProfessors,
   initAllocations,
 } from '../constants';
+import styles from '../HogwartsSchedule.module.css';
 
 const Schedule = ({ professors }) => {
   const [allocations, setAllocations] = useState(
@@ -60,12 +57,12 @@ const Schedule = ({ professors }) => {
   }, [professors]);
 
   return (
-    <div>
-      <table width={'100%'} aria-label='allocation-table'>
+    <div className={styles.scheduleContainer}>
+      <table aria-label='allocation-table'>
         <thead>
           <tr>
-            <th>Student</th>
-            <th>Subject</th>
+            <th width='30%'>Student</th>
+            <th width='30%'>Subject</th>
             <th>Professor</th>
           </tr>
         </thead>
@@ -73,9 +70,9 @@ const Schedule = ({ professors }) => {
           {allocations
             ? allocations.map(({ key, studentName, subject, professor }) => (
                 <tr key={key} aria-label={`allocation for ${studentName}`}>
-                  <td>{studentName}</td>
-                  <td>{subject}</td>
-                  <td>
+                  <td aria-label={`student name ${key}`}>{studentName}</td>
+                  <td aria-label={subject}>{subject}</td>
+                  <td aria-label={subject}>
                     {professor ? (
                       professor.name
                     ) : (

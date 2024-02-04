@@ -8,25 +8,27 @@ const HogwartsSchedule = () => {
   const [professors, setProfessors] = useState(PROFESSORS);
 
   const handleAttendance = (profId, isPresent) => {
-    // TODO - better way to update the object in the list
     const profMatchIdx = professors.find((prof) => prof.id === profId);
     profMatchIdx.isPresent = isPresent;
     setProfessors([...professors]);
   };
 
-  console.log('Render Parent');
-
   // Subject filter can come here, based on selected subjects professor and students allocation has to be maintained
 
   return (
-    <div className={styles.wrapper}>
-      <Attendance
-        professors={professors}
-        onAttendanceChange={handleAttendance}
-      />
-      <Schedule professors={professors} />
+    <div>
+      <div>
+        <header className={styles.heading}>HOGWARTS SCHEDULE</header>
+      </div>
+      <div className={styles.wrapper}>
+        <Attendance
+          professors={professors}
+          onAttendanceChange={handleAttendance}
+        />
+        <Schedule professors={professors} />
+      </div>
     </div>
   );
 };
 
-export default HogwartsSchedule;
+export default React.memo(HogwartsSchedule);

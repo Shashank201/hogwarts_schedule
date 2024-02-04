@@ -1,13 +1,77 @@
 .wrapper {
   display: flex;
-  height: 100%;
+  /* border: 2px solid lightgray; */
+  width: 98%;
+  margin: auto;
 }
 
 .wrapper > div {
   flex: 1;
-  border-right: 2px solid gray;
+  border-right: 2px solid lightgray;
 }
 
 .wrapper > div:last-child {
   border-right: none;
+}
+
+.scheduleContainer,
+.attendanceContainer {
+  max-width: 95%;
+  padding: 0 2rem;
+}
+
+.heading {
+  text-align: center;
+  /* background-color: rgb(239, 204, 88); */
+  font-size: larger;
+  font-weight: 700;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
+}
+
+table td,
+table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* table tr:hover {
+  background-color: #ddd;
+} */
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #105697;
+  color: white;
+}
+
+.selectContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+select {
+  width: 50%;
+  text-align: center;
+  padding: 0.2rem;
+  border-radius: 5px;
+  box-sizing: content-box;
+}
+
+option {
+  padding: 0.2rem;
 }
