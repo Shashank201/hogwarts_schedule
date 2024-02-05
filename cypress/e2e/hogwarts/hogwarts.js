@@ -5,10 +5,10 @@ Given('I open hogwarts schedule page', () => {
   cy.visit('http://localhost:3000/');
 });
 
-When('I reload it should render attendance component', () => {
+When('I should see attendance table', () => {
   cy.get('table[aria-label="attendance-table"]').should('exist');
 });
 
-Then('I should see list of professors', () => {
-  cy.get('table[aria-label="attendance-table"]').should('exist');
+Then('I should see allocation table', () => {
+  cy.get('table[aria-label="allocation-table"]').should('exist');
 });
