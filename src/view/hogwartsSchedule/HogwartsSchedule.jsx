@@ -8,7 +8,7 @@ const HogwartsSchedule = () => {
   const [professors, setProfessors] = useState(PROFESSORS);
 
   const handleAttendance = (profId, isPresent) => {
-    const profMatchIdx = professors.find((prof) => prof.id === profId);
+    const profMatchIdx = professors.find((prof) => prof?.id === profId);
     profMatchIdx.isPresent = isPresent;
     setProfessors([...professors]);
   };
