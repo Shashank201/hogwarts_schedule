@@ -3,6 +3,18 @@ import user from '@testing-library/user-event';
 import Attendance from './Attendance';
 import { PROFESSORS } from '../../../data/professors';
 
+test('should have table with th values Professor Name and Attendance', () => {
+  render(<Attendance />);
+
+  const tableHeaderValues = ['Professor Name', 'Attendance'];
+  for (let headerName of tableHeaderValues) {
+    const tableHeader = screen.getByRole('columnheader', {
+      name: headerName,
+    });
+    expect(tableHeader).toBeInTheDocument();
+  }
+});
+
 test('should have with zero professors if professor array is empty', () => {
   render(<Attendance />);
   const thcount = screen.getAllByRole('columnheader');
@@ -20,6 +32,23 @@ test('should have with zero professors if professor array is empty', () => {
 
   const totalRows = screen.getAllByRole('row');
   expect(totalRows).toHaveLength(1);
+});
+
+test('should display empty string if professor name is not given', () => {
+  const professorArray = [
+    {
+      id: 1,
+      role: 'Headmaster',
+      isPresent: true,
+    },
+  ];
+
+  render(<Attendance professors={professorArray} />);
+
+  const column = screen.getByRole('cell', {
+    name: '',
+  });
+  expect(column).toBeInTheDocument();
 });
 
 test('should render all professors', async () => {

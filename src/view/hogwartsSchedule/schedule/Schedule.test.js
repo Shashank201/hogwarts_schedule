@@ -65,8 +65,8 @@ const allocations = [
   },
 ];
 
-test('should display allocation of professor to students', () => {
-  render(<Schedule professors={PROFESSORS} />);
+test('should have table with th values Student, Subject and Professor', () => {
+  render(<Schedule />);
 
   const tableHeaderValues = ['Student', 'Subject', 'Professor'];
   for (let headerName of tableHeaderValues) {
@@ -75,6 +75,10 @@ test('should display allocation of professor to students', () => {
     });
     expect(tableHeader).toBeInTheDocument();
   }
+});
+
+test('should display allocation of professor to students', () => {
+  render(<Schedule professors={PROFESSORS} />);
 
   for (let allocation of allocations) {
     const allocationRow = screen.getByRole('row', {

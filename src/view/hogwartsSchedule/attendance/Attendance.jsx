@@ -12,25 +12,23 @@ const Attendance = ({ professors, onAttendanceChange }) => {
           </tr>
         </thead>
         <tbody>
-          {professors
-            ? professors.map((prof) => (
-                <tr key={prof.id}>
-                  <td>{prof.name}</td>
-                  <td className={styles.selectContainer}>
-                    <select
-                      value={prof.isPresent}
-                      onChange={({ target }) => {
-                        onAttendanceChange(prof.id, target.value === 'true');
-                      }}
-                      aria-label={`${prof.name}-attendance-dropdown`}
-                    >
-                      <option value={true}>Present</option>
-                      <option value={false}>Absent</option>
-                    </select>
-                  </td>
-                </tr>
-              ))
-            : null}
+          {professors?.map((prof) => (
+            <tr key={prof?.id}>
+              <td>{prof.name ? prof.name : ''}</td>
+              <td className={styles.selectContainer}>
+                <select
+                  value={prof?.isPresent}
+                  onChange={({ target }) => {
+                    onAttendanceChange(prof?.id, target.value === 'true');
+                  }}
+                  aria-label={`${prof?.name}-attendance-dropdown`}
+                >
+                  <option value={true}>Present</option>
+                  <option value={false}>Absent</option>
+                </select>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

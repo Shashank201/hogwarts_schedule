@@ -3,93 +3,59 @@ import HogwartsSchedule from './HogwartsSchedule';
 import user from '@testing-library/user-event';
 import { getProfessorName } from '../../data/professors';
 
-test('should change allocated professor onChange of attendance', async () => {
-  render(<HogwartsSchedule />);
-
+const validateStudentsProfessor = async (studentArray, professorName) => {
   const allocationTable = await screen.findByRole('table', {
     name: /allocation-table/i,
   });
   expect(allocationTable).toBeInTheDocument();
 
-  const harryPotterAllocationRow = await within(allocationTable).findByRole(
-    'row',
-    {
-      name: /allocation for harry potter/i,
-    }
-  );
+  for (let student in studentArray) {
+    const studentAllocationRow = await within(allocationTable).findByRole(
+      'row',
+      {
+        name: new RegExp(`allocation for ${student}`),
+      }
+    );
+    expect(studentAllocationRow).toBeInTheDocument();
 
-  expect(harryPotterAllocationRow).toBeInTheDocument();
+    const professor = within(studentAllocationRow).getByRole('cell', {
+      name: professorName,
+    });
+    expect(professor).toBeInTheDocument();
+  }
+};
 
-  const harryPotterProfessorShouldBeHorace = within(
-    harryPotterAllocationRow
-  ).getByRole('cell', {
-    name: /Horace Slughorn/i,
+const markProferssorAbsent = async (professor) => {
+  const professorDropdown = await screen.findByRole('combobox', {
+    name: new RegExp(`${professor}-attendance-dropdown`),
   });
-  expect(harryPotterProfessorShouldBeHorace).toBeInTheDocument();
+  expect(professorDropdown).toBeInTheDocument();
+  expect(professorDropdown).toHaveValue('true');
+  await user.selectOptions(professorDropdown, 'false');
+  expect(professorDropdown).toHaveValue('false');
+};
 
-  const horaceDropdown = await screen.findByRole('combobox', {
-    name: /Horace Slughorn-attendance-dropdown/i,
-  });
+test('should change allocated professor onChange of attendance', async () => {
+  render(<HogwartsSchedule />);
 
-  expect(horaceDropdown).toBeInTheDocument();
-  expect(horaceDropdown).toHaveValue('true');
+  const students = ['Harry Potter', 'Draco Malfoy'];
+  validateStudentsProfessor(students, 'Horace Slughorn');
 
-  // if Horace is absent assign Rubeus Hagrid to Harry
-  await user.selectOptions(horaceDropdown, 'false');
+  // if Horace is absent then next available professor should be Rubeus Hagrid
+  markProferssorAbsent('Horace Slughorn');
+  validateStudentsProfessor(students, 'Rubeus Hagrid');
 
-  expect(horaceDropdown).toHaveValue('false');
+  // if Rubeus is absent then next available professor should be Minerva
+  markProferssorAbsent('Rubeus Hagrid');
+  validateStudentsProfessor(students, 'Minerva McGonagall');
 
-  const harryPotterProfessorShouldBeRubeus = await within(
-    harryPotterAllocationRow
-  ).findByRole('cell', {
-    name: /Rubeus Hagrid/i,
-  });
-  expect(harryPotterProfessorShouldBeRubeus).toBeInTheDocument();
+  // if Minerva McGonagall is absent then next available professor should be Professor Dumbledore
+  markProferssorAbsent('Minerva McGonagall');
+  validateStudentsProfessor(students, 'Professor Dumbledore');
 
-  // if Rubeus is absent assign Minerva to Harry
-  const rubeusDropdown = await screen.findByRole('combobox', {
-    name: /Rubeus Hagrid-attendance-dropdown/i,
-  });
-  expect(rubeusDropdown).toHaveValue('true');
-  await user.selectOptions(rubeusDropdown, 'false');
-  expect(rubeusDropdown).toHaveValue('false');
-
-  const harryPotterProfessorShouldBeMinerva = await within(
-    harryPotterAllocationRow
-  ).findByRole('cell', {
-    name: /Minerva McGonagall/i,
-  });
-  expect(harryPotterProfessorShouldBeMinerva).toBeInTheDocument();
-
-  // if Minerva McGonagall is absent assign Professor Dumbledore to Harry
-  const minervaDropdown = await screen.findByRole('combobox', {
-    name: /Minerva McGonagall-attendance-dropdown/i,
-  });
-  expect(minervaDropdown).toHaveValue('true');
-  await user.selectOptions(minervaDropdown, 'false');
-  expect(minervaDropdown).toHaveValue('false');
-
-  const harryPotterProfessorShouldBeDubledore = await within(
-    harryPotterAllocationRow
-  ).findByRole('cell', {
-    name: /Professor Dumbledore/i,
-  });
-  expect(harryPotterProfessorShouldBeDubledore).toBeInTheDocument();
-
-  // if Dubledore is absent then put Not Assigned to Harry
-  const dubledoreDropdown = await screen.findByRole('combobox', {
-    name: /Professor Dumbledore-attendance-dropdown/i,
-  });
-  expect(dubledoreDropdown).toHaveValue('true');
-  await user.selectOptions(dubledoreDropdown, 'false');
-  expect(dubledoreDropdown).toHaveValue('false');
-
-  const harryPotterProfessorShouldBeNotAssigned = await within(
-    harryPotterAllocationRow
-  ).findByRole('cell', {
-    name: /Not Assigned/i,
-  });
-  expect(harryPotterProfessorShouldBeNotAssigned).toBeInTheDocument();
+  // if Dubledore is absent then put Not Assigned to students
+  markProferssorAbsent('Professor Dumbledore');
+  validateStudentsProfessor(students, 'Not Assigned');
 });
 
 test('should return empty if professor id is not in professor array', () => {
@@ -97,4 +63,3 @@ test('should return empty if professor id is not in professor array', () => {
   expect(name).toBe('');
 });
 
-// const pause = () => new Promise((resolve) => setTimeout(resolve, 100));
