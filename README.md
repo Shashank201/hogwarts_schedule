@@ -4,6 +4,10 @@ This project manages schedule of hogwarts. Integration testing is done with cypr
 
 ## Available Scripts
 
+### `npm start`
+
+Start application
+
 To run the integration testing, use below steps:
 
 ### `npm run cy:open`
