@@ -30,7 +30,8 @@
 .wrapper {
   display: flex;
   /* border: 2px solid lightgray; */
-  width: 98%;
+  max-width: 98%;
+  overflow-x: auto;
   margin: auto;
   min-height: 80%;
 }
