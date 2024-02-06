@@ -4,12 +4,14 @@ export const PROFESSORS = [
     name: 'Professor Dumbledore',
     role: 'Headmaster',
     isPresent: true,
+    avatar: 'avatar-Albus-Dumbledore',
   },
   {
     id: 2,
     name: 'Minerva McGonagall',
     role: 'Headmistress',
     isPresent: true,
+    avatar: 'avatar-Minerva-McGonagall',
   },
   {
     id: 3,
@@ -17,6 +19,7 @@ export const PROFESSORS = [
     role: 'Professor',
     subject: 'Potions Master',
     isPresent: true,
+    avatar: 'avatar-Horace-Slughorn',
   },
   {
     id: 4,
@@ -24,6 +27,7 @@ export const PROFESSORS = [
     role: 'Professor',
     subject: 'Potions Master',
     isPresent: true,
+    avatar: 'avatar-Severus-Snape',
   },
   {
     id: 5,
@@ -31,6 +35,7 @@ export const PROFESSORS = [
     role: 'Standby Professor',
     subject: 'Potions Master',
     isPresent: true,
+    avatar: 'avatar-Rubeus-Hagrid',
   },
   // {
   //   id: 6,

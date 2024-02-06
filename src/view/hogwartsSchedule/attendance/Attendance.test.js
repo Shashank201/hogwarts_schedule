@@ -59,7 +59,6 @@ test('should render all professors', async () => {
     });
     expect(name).toBeInTheDocument();
   }
-
   const dropdowns = await screen.findAllByRole('combobox');
   expect(dropdowns).toHaveLength(PROFESSORS.length);
 });
@@ -71,6 +70,7 @@ test('should call a function on change of dropdown', async () => {
       name: 'Professor Dumbledore',
       role: 'Headmaster',
       isPresent: true,
+      avatar: 'avatar-Albus-Dumbledore',
     },
   ];
   const mockedFunction = jest.fn();
@@ -86,8 +86,9 @@ test('should call a function on change of dropdown', async () => {
   });
 
   expect(name).toBeInTheDocument();
-
-  const dropdown = await screen.findByRole('combobox');
+  const dropdown = await screen.findByRole('combobox', {
+    name: /Professor Dumbledore-attendance-dropdown/,
+  });
   expect(dropdown).toHaveValue('true');
   await user.selectOptions(dropdown, 'false');
   expect(mockedFunction).toHaveBeenCalled();

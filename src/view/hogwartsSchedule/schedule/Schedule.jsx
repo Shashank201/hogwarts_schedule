@@ -8,6 +8,7 @@ import {
   initAllocations,
 } from '../constants';
 import styles from '../HogwartsSchedule.module.css';
+import NameCard from '../../../components/NameCard/NameCard';
 
 const Schedule = ({ professors }) => {
   const [allocations, setAllocations] = useState(
@@ -67,22 +68,31 @@ const Schedule = ({ professors }) => {
           </tr>
         </thead>
         <tbody>
-          {allocations?.map(({ key, studentName, subject, professor }) => (
-            <tr key={key} aria-label={`allocation for ${studentName}`}>
-              <td aria-label={studentName}>{studentName}</td>
-              <td aria-label={subject}>{subject}</td>
-              <td
-                id={`assigned-professor-${
-                  professor && professor.id ? professor.id : 'not-assigned'
-                }`}
-                aria-label={professor?.name || 'Not Assigned'}
-              >
-                {professor?.name || (
-                  <span style={{ color: 'red' }}>Not Assigned</span>
-                )}
-              </td>
-            </tr>
-          ))}
+          {allocations?.map(
+            ({ key, studentName, subject, professor, studentAvatar }) => (
+              <tr key={key} aria-label={`allocation for ${studentName}`}>
+                <td aria-label={studentName}>
+                  <NameCard
+                    avatarSrc={studentAvatar}
+                    customSize={50}
+                    title={studentName}
+                    customClass='student-card'
+                  />
+                </td>
+                <td aria-label={subject}>{subject}</td>
+                <td
+                  id={`assigned-professor-${
+                    professor && professor.id ? professor.id : 'not-assigned'
+                  }`}
+                  aria-label={professor?.name || 'Not Assigned'}
+                >
+                  {professor?.name || (
+                    <span style={{ color: 'red' }}>Not Assigned</span>
+                  )}
+                </td>
+              </tr>
+            )
+          )}
         </tbody>
       </table>
     </div>

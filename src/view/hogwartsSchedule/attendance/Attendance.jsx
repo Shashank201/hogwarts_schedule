@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '../HogwartsSchedule.module.css';
+import NameCard from '../../../components/NameCard/NameCard';
 
 const Attendance = ({ professors, onAttendanceChange }) => {
   return (
@@ -15,8 +16,30 @@ const Attendance = ({ professors, onAttendanceChange }) => {
           {professors
             ? professors.map((prof) => (
                 <tr key={prof.id}>
-                  <td>{prof.name ? prof.name : ''}</td>
-                  <td className={styles.selectContainer}>
+                  <td>
+                    <NameCard
+                      avatarSrc={prof.avatar ? prof.avatar : ''}
+                      customSize={50}
+                      title={prof.name ? prof.name : ''}
+                      customClass='professor-card'
+                    />
+                  </td>
+                  <td>
+                    {
+                      // <Select
+                    //   aria-label={`${prof.name}-attendance-dropdown`}
+                    //   id={`attendance-for-${prof.id}`}
+                    //   defaultValue='true'
+                    //   style={{ width: '80%', paddingLeft: '40px' }}
+                    //   onChange={(value) => {
+                    //     onAttendanceChange(prof.id, value === 'true');
+                    //   }}
+                    //   options={[
+                    //     { value: 'true', label: 'Present' },
+                    //     { value: 'false', label: 'Absent' },
+                    //   ]}
+                    // />
+                  }
                     <select
                       value={prof.isPresent}
                       onChange={({ target }) => {

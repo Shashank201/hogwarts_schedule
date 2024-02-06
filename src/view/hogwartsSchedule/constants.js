@@ -11,7 +11,10 @@ export const initAllocations = () => {
       const prof = st?.allocations?.[sub];
       let professor = null;
       if (prof) {
-        professor = { id: prof, name: getProfessorName(prof) };
+        professor = {
+          id: prof,
+          name: getProfessorName(prof),
+        };
       }
 
       allocations.push({
@@ -20,6 +23,7 @@ export const initAllocations = () => {
         studentName: st.name,
         subject: sub,
         professor,
+        studentAvatar: st.avatar,
       });
     });
   });
@@ -29,7 +33,7 @@ export const initAllocations = () => {
 export const INITIAL_ALLOCATION = initAllocations();
 // unique professor id
 export const allocatedProfessors = new Set(
-  INITIAL_ALLOCATION.filter((al) => !!al.professor)?.map((al) => al.professor.id)
+  INITIAL_ALLOCATION.filter((al) => !!al.professor)?.map(
+    (al) => al.professor.id
+  )
 );
-
-
