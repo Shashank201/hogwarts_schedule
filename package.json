@@ -1,4 +1,5 @@
 {
+  "homepage": "https://Shashank201.github.io/hogwarts_schedule",
   "name": "hogwarts_schedule",
   "version": "0.1.0",
   "private": true,
@@ -13,6 +14,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -47,7 +50,8 @@
   "devDependencies": {
     "cypress": "^13.6.4",
     "cypress-cucumber-preprocessor": "^4.3.1",
-    "eslint-plugin-cypress": "^2.15.1"
+    "eslint-plugin-cypress": "^2.15.1",
+    "gh-pages": "^6.1.1"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true,
