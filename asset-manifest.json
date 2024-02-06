@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/hogwarts_schedule/static/css/main.c65fb548.css",
+    "main.js": "/hogwarts_schedule/static/js/main.dafc26fb.js",
+    "index.html": "/hogwarts_schedule/index.html",
+    "main.c65fb548.css.map": "/hogwarts_schedule/static/css/main.c65fb548.css.map",
+    "main.dafc26fb.js.map": "/hogwarts_schedule/static/js/main.dafc26fb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c65fb548.css",
+    "static/js/main.dafc26fb.js"
+  ]
+}
