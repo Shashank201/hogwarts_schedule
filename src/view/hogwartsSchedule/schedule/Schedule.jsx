@@ -71,7 +71,12 @@ const Schedule = ({ professors }) => {
             <tr key={key} aria-label={`allocation for ${studentName}`}>
               <td aria-label={studentName}>{studentName}</td>
               <td aria-label={subject}>{subject}</td>
-              <td aria-label={professor?.name || 'Not Assigned'}>
+              <td
+                id={`assigned-professor-${
+                  professor && professor.id ? professor.id : 'not-assigned'
+                }`}
+                aria-label={professor?.name || 'Not Assigned'}
+              >
                 {professor?.name || (
                   <span style={{ color: 'red' }}>Not Assigned</span>
                 )}

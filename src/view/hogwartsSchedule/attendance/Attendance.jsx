@@ -23,6 +23,7 @@ const Attendance = ({ professors, onAttendanceChange }) => {
                         onAttendanceChange(prof.id, target.value === 'true');
                       }}
                       aria-label={`${prof.name}-attendance-dropdown`}
+                      id={`attendance-for-${prof.id}`}
                     >
                       <option value={true}>Present</option>
                       <option value={false}>Absent</option>
