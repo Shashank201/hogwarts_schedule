@@ -1,5 +1,5 @@
 .hogwartsContainer {
-  height: 100vh;
+  min-height: 100vh;
   color: white;
 }
 
@@ -31,14 +31,13 @@
   display: flex;
   /* border: 2px solid lightgray; */
   max-width: 98%;
-  overflow-x: auto;
   margin: auto;
   min-height: 80%;
 }
 
 .wrapper > div {
   flex: 1;
-  border-right: 2px solid rgb(90, 84, 84);
+  border-right: 2px solid #fff;
 }
 
 .wrapper > div:last-child {
@@ -95,21 +94,22 @@ table td {
   padding: 10px 12px;
 }
 
-.selectContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@media only screen and (max-width: 750px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 80%;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .wrapper > div {
+    flex: 1;
+    border-right: unset;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 2rem;
+  }
 
-select {
-  width: 50%;
-  text-align: center;
-  padding: 0.2rem;
-  border-radius: 5px;
-  box-sizing: content-box;
-  cursor: pointer;
-}
-
-option {
-  padding: 0.2rem;
+  .wrapper > div:last-child {
+    border-right: none;
+  }
 }

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
 import Attendance from './Attendance';
 import { PROFESSORS } from '../../../data/professors';
@@ -30,8 +30,11 @@ test('should have with zero professors if professor array is empty', () => {
   expect(headerForProfessor).toBeInTheDocument();
   expect(headerForAttendance).toBeInTheDocument();
 
-  const totalRows = screen.getAllByRole('row');
-  expect(totalRows).toHaveLength(1);
+  const noProfessorsFound = screen.getByRole('cell', {
+    name: /professors not found/i,
+  });
+
+  expect(noProfessorsFound).toBeInTheDocument();
 });
 
 test('should display empty string if professor name is not given', () => {
@@ -59,8 +62,8 @@ test('should render all professors', async () => {
     });
     expect(name).toBeInTheDocument();
   }
-  const dropdowns = await screen.findAllByRole('combobox');
-  expect(dropdowns).toHaveLength(PROFESSORS.length);
+  const switchBtns = await screen.findAllByRole('switch');
+  expect(switchBtns).toHaveLength(PROFESSORS.length);
 });
 
 test('should call a function on change of dropdown', async () => {
@@ -86,10 +89,15 @@ test('should call a function on change of dropdown', async () => {
   });
 
   expect(name).toBeInTheDocument();
-  const dropdown = await screen.findByRole('combobox', {
+  const professorSwitch = await screen.findByRole('switch', {
     name: /Professor Dumbledore-attendance-dropdown/,
   });
-  expect(dropdown).toHaveValue('true');
-  await user.selectOptions(dropdown, 'false');
+  expect(professorSwitch).toBeInTheDocument();
+  expect(professorSwitch).toBeChecked();
+
+  await waitFor(async () => {
+    await user.click(professorSwitch);
+    expect(professorSwitch).not.toBeChecked();
+  });
   expect(mockedFunction).toHaveBeenCalled();
 });
