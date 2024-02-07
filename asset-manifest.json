@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/hogwarts_schedule/static/css/main.f8562dc3.css",
-    "main.js": "/hogwarts_schedule/static/js/main.280acdd4.js",
+    "main.css": "/hogwarts_schedule/static/css/main.f518666b.css",
+    "main.js": "/hogwarts_schedule/static/js/main.ef9b147d.js",
     "index.html": "/hogwarts_schedule/index.html",
-    "main.f8562dc3.css.map": "/hogwarts_schedule/static/css/main.f8562dc3.css.map",
-    "main.280acdd4.js.map": "/hogwarts_schedule/static/js/main.280acdd4.js.map"
+    "main.f518666b.css.map": "/hogwarts_schedule/static/css/main.f518666b.css.map",
+    "main.ef9b147d.js.map": "/hogwarts_schedule/static/js/main.ef9b147d.js.map"
   },
   "entrypoints": [
-    "static/css/main.f8562dc3.css",
-    "static/js/main.280acdd4.js"
+    "static/css/main.f518666b.css",
+    "static/js/main.ef9b147d.js"
   ]
 }
