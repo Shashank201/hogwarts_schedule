@@ -1,4 +1,5 @@
 import React from 'react';
+import { Switch } from 'antd';
 import styles from '../HogwartsSchedule.module.css';
 import NameCard from '../../../components/NameCard/NameCard';
 
@@ -25,32 +26,16 @@ const Attendance = ({ professors, onAttendanceChange }) => {
                     />
                   </td>
                   <td>
-                    {
-                      // <Select
-                    //   aria-label={`${prof.name}-attendance-dropdown`}
-                    //   id={`attendance-for-${prof.id}`}
-                    //   defaultValue='true'
-                    //   style={{ width: '80%', paddingLeft: '40px' }}
-                    //   onChange={(value) => {
-                    //     onAttendanceChange(prof.id, value === 'true');
-                    //   }}
-                    //   options={[
-                    //     { value: 'true', label: 'Present' },
-                    //     { value: 'false', label: 'Absent' },
-                    //   ]}
-                    // />
-                  }
-                    <select
-                      value={prof.isPresent}
-                      onChange={({ target }) => {
-                        onAttendanceChange(prof.id, target.value === 'true');
-                      }}
-                      aria-label={`${prof.name}-attendance-dropdown`}
+                    <Switch
                       id={`attendance-for-${prof.id}`}
-                    >
-                      <option value={true}>Present</option>
-                      <option value={false}>Absent</option>
-                    </select>
+                      aria-label={`${prof.name}-attendance-dropdown`}
+                      checkedChildren='Present'
+                      unCheckedChildren='Absent'
+                      defaultChecked
+                      onChange={(checked) => {
+                        onAttendanceChange(prof.id, checked);
+                      }}
+                    />
                   </td>
                 </tr>
               ))

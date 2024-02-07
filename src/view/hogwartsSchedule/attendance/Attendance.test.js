@@ -59,8 +59,8 @@ test('should render all professors', async () => {
     });
     expect(name).toBeInTheDocument();
   }
-  const dropdowns = await screen.findAllByRole('combobox');
-  expect(dropdowns).toHaveLength(PROFESSORS.length);
+  const switchBtns = await screen.findAllByRole('switch');
+  expect(switchBtns).toHaveLength(PROFESSORS.length);
 });
 
 test('should call a function on change of dropdown', async () => {
@@ -86,10 +86,19 @@ test('should call a function on change of dropdown', async () => {
   });
 
   expect(name).toBeInTheDocument();
-  const dropdown = await screen.findByRole('combobox', {
+  const professorSwitch = await screen.findByRole('switch', {
     name: /Professor Dumbledore-attendance-dropdown/,
   });
-  expect(dropdown).toHaveValue('true');
-  await user.selectOptions(dropdown, 'false');
+  expect(professorSwitch).toBeInTheDocument();
+  expect(professorSwitch).toBeChecked();
+  expect(professorSwitch).toHaveClass('ant-switch-checked');
+  await user.click(professorSwitch);
+  expect(professorSwitch).not.toHaveClass('ant-switch-checked');
+  // await waitFor(() => {
+  //   const renderedRadioBtn = screen.getByRole('switch', {
+  //     name: /Professor Dumbledore-attendance-dropdown/,
+  //   });
+  //   expect(renderedRadioBtn).toHaveAttribute('aria-checked', 'false');
+  // });
   expect(mockedFunction).toHaveBeenCalled();
 });

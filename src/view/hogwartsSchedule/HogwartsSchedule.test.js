@@ -26,13 +26,13 @@ const validateStudentsProfessor = async (studentArray, professorName) => {
 };
 
 const markProferssorAbsent = async (professor) => {
-  const professorDropdown = await screen.findByRole('combobox', {
+  const professorSwitch = await screen.findByRole('switch', {
     name: new RegExp(`${professor}-attendance-dropdown`),
   });
-  expect(professorDropdown).toBeInTheDocument();
-  expect(professorDropdown).toHaveValue('true');
-  await user.selectOptions(professorDropdown, 'false');
-  expect(professorDropdown).toHaveValue('false');
+  expect(professorSwitch).toBeInTheDocument();
+  expect(professorSwitch).toBeChecked();
+  await user.click(professorSwitch);
+  expect(professorSwitch).not.toBeChecked();
 };
 
 test('should change allocated professor onChange of attendance', async () => {
@@ -62,4 +62,3 @@ test('should return empty if professor id is not in professor array', () => {
   const name = getProfessorName(10);
   expect(name).toBe('');
 });
-
