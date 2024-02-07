@@ -14,32 +14,39 @@ const Attendance = ({ professors, onAttendanceChange }) => {
           </tr>
         </thead>
         <tbody>
-          {professors
-            ? professors.map((prof) => (
-                <tr key={prof.id}>
-                  <td>
-                    <NameCard
-                      avatarSrc={prof.avatar ? prof.avatar : ''}
-                      customSize={50}
-                      title={prof.name ? prof.name : ''}
-                      customClass='professor-card'
-                    />
-                  </td>
-                  <td>
-                    <Switch
-                      id={`attendance-for-${prof.id}`}
-                      aria-label={`${prof.name}-attendance-dropdown`}
-                      checkedChildren='Present'
-                      unCheckedChildren='Absent'
-                      defaultChecked
-                      onChange={(checked) => {
-                        onAttendanceChange(prof.id, checked);
-                      }}
-                    />
-                  </td>
-                </tr>
-              ))
-            : null}
+          {professors?.length ? (
+            professors.map((prof) => (
+              <tr key={prof.id}>
+                <td>
+                  <NameCard
+                    avatarSrc={prof.avatar ? prof.avatar : ''}
+                    customSize={50}
+                    title={prof.name ? prof.name : ''}
+                    customClass='professor-card'
+                  />
+                </td>
+                <td>
+                  {/* Since Dropdown only had 2 options, to save user clicks Switch/ Radio Button is best choice */}
+                  <Switch
+                    id={`attendance-for-${prof.id}`}
+                    aria-label={`${prof.name}-attendance-dropdown`}
+                    checkedChildren='Present'
+                    unCheckedChildren='Absent'
+                    defaultChecked
+                    onChange={(checked) => {
+                      onAttendanceChange(prof.id, checked);
+                    }}
+                  />
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={2} style={{ textAlign: 'center' }}>
+                Professors not found
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

@@ -3,6 +3,7 @@ import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps';
 
 Given('I open hogwarts schedule page', () => {
   cy.visit('http://localhost:3000/');
+  cy.get('#assigned-professor-3').should('have.text', 'Horace Slughorn');
 });
 
 When('I mark Professor Horace absent', () => {

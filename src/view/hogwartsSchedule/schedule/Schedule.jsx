@@ -99,4 +99,4 @@ const Schedule = ({ professors }) => {
   );
 };
 
-export default React.memo(Schedule);
+export default Schedule;

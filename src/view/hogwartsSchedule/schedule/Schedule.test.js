@@ -12,6 +12,7 @@ const allocations = [
       id: 3,
       name: 'Horace Slughorn',
     },
+    studentAvatar: 'avatar-Harry-Potter',
   },
   {
     key: '2-Potions Master',
@@ -22,6 +23,7 @@ const allocations = [
       id: 5,
       name: 'Rubeus Hagrid',
     },
+    studentAvatar: 'avatar-Hermione-Granger',
   },
   {
     key: '3-Potions Master',
@@ -32,6 +34,7 @@ const allocations = [
       id: 4,
       name: 'Severus Snape',
     },
+    studentAvatar: 'avatar-Ron-Weasley',
   },
   {
     key: '4-Potions Master',
@@ -42,6 +45,7 @@ const allocations = [
       id: 3,
       name: 'Horace Slughorn',
     },
+    studentAvatar: 'avatar-Draco-Malfoy',
   },
   {
     key: '5-Potions Master',
@@ -52,6 +56,7 @@ const allocations = [
       id: 5,
       name: 'Rubeus Hagrid',
     },
+    studentAvatar: 'avatar-Padma-Patil',
   },
   {
     key: '6-Potions Master',
@@ -62,6 +67,7 @@ const allocations = [
       id: 4,
       name: 'Severus Snape',
     },
+    studentAvatar: 'avatar-Luna-Lovegood',
   },
 ];
 

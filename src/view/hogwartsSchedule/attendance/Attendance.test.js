@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
 import Attendance from './Attendance';
 import { PROFESSORS } from '../../../data/professors';
@@ -30,8 +30,11 @@ test('should have with zero professors if professor array is empty', () => {
   expect(headerForProfessor).toBeInTheDocument();
   expect(headerForAttendance).toBeInTheDocument();
 
-  const totalRows = screen.getAllByRole('row');
-  expect(totalRows).toHaveLength(1);
+  const noProfessorsFound = screen.getByRole('cell', {
+    name: /professors not found/i,
+  });
+
+  expect(noProfessorsFound).toBeInTheDocument();
 });
 
 test('should display empty string if professor name is not given', () => {
@@ -91,14 +94,10 @@ test('should call a function on change of dropdown', async () => {
   });
   expect(professorSwitch).toBeInTheDocument();
   expect(professorSwitch).toBeChecked();
-  expect(professorSwitch).toHaveClass('ant-switch-checked');
-  await user.click(professorSwitch);
-  expect(professorSwitch).not.toHaveClass('ant-switch-checked');
-  // await waitFor(() => {
-  //   const renderedRadioBtn = screen.getByRole('switch', {
-  //     name: /Professor Dumbledore-attendance-dropdown/,
-  //   });
-  //   expect(renderedRadioBtn).toHaveAttribute('aria-checked', 'false');
-  // });
+
+  await waitFor(async () => {
+    await user.click(professorSwitch);
+    expect(professorSwitch).not.toBeChecked();
+  });
   expect(mockedFunction).toHaveBeenCalled();
 });
